@@ -6,13 +6,16 @@ const UserController = require('./controllers/UserController');
 const GroupController = require('./controllers/GroupController');
 const TrainingController = require('./controllers/TrainingController');
 const StudentController = require('./controllers/StudentController');
+const RegisterController = require('./controllers/RegisterController');
 
 const upload = multer({
   dest: "./tmp"
 });
 
+routes.post("/register", upload.single("file"), RegisterController.createRegister);
+
 routes.get("/students", StudentController.index);
-routes.post("/students", upload.single("file"), StudentController.create);
+routes.post("/students", StudentController.create);
 routes.put("/students/:id", StudentController.update);
 routes.delete("/students/:id", StudentController.delete);
 
